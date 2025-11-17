@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3fdf02bb277cba34aa8770424098d559, type: 2}
     - target: {fileID: 919132149155446097, guid: d56ce4b087edf9b45b37cfec80773b0c, type: 3}
       propertyPath: m_Name
-      value: paintingbig1
+      value: p.paintingbig1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -88,5 +88,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.17043044, y: 1.4166237, z: 1.9841826}
-  m_Center: {x: 0.019044677, y: 0.0003980398, z: 0.00019550322}
+  m_Size: {x: 0.17043044, y: 1.4166237, z: 1.9841827}
+  m_Center: {x: -0.08596482, y: -0.0040681357, z: 0.0011849104}
