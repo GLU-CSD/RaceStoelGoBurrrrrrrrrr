@@ -8,11 +8,13 @@ public class CarMovement1 : MonoBehaviour
     [SerializeField] private InputActionReference gasButton;
     [SerializeField] private InputActionReference steer;
     [SerializeField] private InputActionReference poke;
+    [SerializeField] private InputActionReference breakButton;
 
     [Header("Car Body")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject carBody;
     private float pokeValue;
+    private float breakValue;
 
     [Header("Car Movement")]
     [SerializeField] private Transform frontLeftWheel;
@@ -43,7 +45,10 @@ public class CarMovement1 : MonoBehaviour
         steerValue = steer.action.ReadValue<float>();
         gasValue = gasButton.action.ReadValue<float>();
         pokeValue = poke.action.ReadValue<float>();
+        breakValue = breakButton.action.ReadValue<float>();
+
         gasValue = 1f - gasValue;
+        breakValue = 1f - breakValue;
 
         Debug.Log(pokeValue);
 
@@ -67,5 +72,8 @@ public class CarMovement1 : MonoBehaviour
         {
             rb.linearVelocity += transform.forward * gasValue / -4;
         }
+
+        //smooth break
+
     }
 }
