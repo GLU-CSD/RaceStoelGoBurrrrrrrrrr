@@ -1,24 +1,36 @@
+using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CarMovement1 : MonoBehaviour
 {
+    [Header("Input actions")]
     [SerializeField] private InputActionReference gasButton;
-    [SerializeField] private InputActionReference reverseButton;
-    [SerializeField] private InputActionReference turnLeftButton;
-    [SerializeField] private InputActionReference turnRightButton;
+    [SerializeField] private InputActionReference steer;
+    [SerializeField] private InputActionReference poke;
 
+    [Header("Car Body")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject carBody;
+    private float pokeValue;
 
+    [Header("Car Movement")]
     [SerializeField] private Transform frontLeftWheel;
     [SerializeField] private Transform frontRightWheel;
     [SerializeField] private Transform backLeftWheel;
     [SerializeField] private Transform backRightWheel;
+    private float gasValue;
+    private float currentGasValue;
+    private float carSpeed = 5f;
+    private float maxSpeed = 0;
 
-    [SerializeField] private Transform left;
-    [SerializeField] private Transform right;
-    [SerializeField] private Transform straight;
+    [Header("Car Steering")]
+    private float maxSteerAngle = 30f;
+    private float steerSpeed = 8f;
+    private float currentSteerAngle;
+    private float steerValue;
+
+
 
     private void Start()
     {
@@ -27,40 +39,33 @@ public class CarMovement1 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (gasButton.action.IsPressed())
-        {
-            rb.linearVelocity += transform.forward * 20 * Time.deltaTime;
+        //Steering Input and movement input
+        steerValue = steer.action.ReadValue<float>();
+        gasValue = gasButton.action.ReadValue<float>();
+        pokeValue = poke.action.ReadValue<float>();
+        gasValue = 1f - gasValue;
 
-            frontLeftWheel.Rotate(0, 0, -200 * Time.deltaTime);
-            frontRightWheel.Rotate(0, 0, -200 * Time.deltaTime);
-            backLeftWheel.Rotate(0, 0, -200 * Time.deltaTime);
-            backRightWheel.Rotate(0, 0, -200 * Time.deltaTime);
+        Debug.Log(pokeValue);
+
+        //apply steering angle
+        float targetSteerAngle = steerValue * maxSteerAngle;
+
+        // apply current move speed
+        float targetGasValue = currentGasValue * maxSpeed;
+
+        // smooth steering (car doesn't snap instantly)
+        currentSteerAngle = Mathf.Lerp(currentSteerAngle, targetSteerAngle, steerSpeed * Time.deltaTime);
+        transform.Rotate(0, steerValue * maxSteerAngle * 0.1f, 0);
+
+        //smooth car movement
+        currentGasValue = Mathf.Lerp(currentGasValue, targetGasValue, carSpeed * Time.deltaTime);
+        if (pokeValue == 0)
+        {
+            rb.linearVelocity += transform.forward * gasValue / 4;
         }
-
-        if (reverseButton.action.IsPressed())
+        else if (pokeValue == 1)
         {
-            rb.linearVelocity -= transform.forward * 80 * Time.deltaTime;
-
-            frontLeftWheel.Rotate(0, 0, 200 * Time.deltaTime);
-            frontRightWheel.Rotate(0, 0, 200 * Time.deltaTime);
-            backLeftWheel.Rotate(0, 0, 200 * Time.deltaTime);
-            backRightWheel.Rotate(0, 0, 200 * Time.deltaTime);
-        }
-
-        if (turnLeftButton.action.IsPressed())
-        {
-            transform.Rotate(0, -80 * Time.deltaTime, 0);
-            carBody.transform.rotation = Quaternion.Lerp(carBody.transform.rotation, left.rotation, 4 * Time.deltaTime);
-            rb.angularVelocity += carBody.transform.forward * 120 * Time.deltaTime;
-            rb.angularVelocity -= transform.forward *110 * Time.deltaTime;
-        }
-
-        if (turnRightButton.action.IsPressed())
-        {
-            transform.Rotate(0, 80 * Time.deltaTime, 0);
-            carBody.transform.rotation = Quaternion.Lerp(carBody.transform.rotation, right.rotation, 4 * Time.deltaTime);
-            rb.angularVelocity += transform.forward * 120 * Time.deltaTime;
-            rb.angularVelocity -= carBody.transform.forward * 110 * Time.deltaTime;
+            rb.linearVelocity += transform.forward * gasValue / -4;
         }
     }
 }

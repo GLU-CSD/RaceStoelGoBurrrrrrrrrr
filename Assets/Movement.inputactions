@@ -6,159 +6,64 @@
             "id": "a4b21bb3-87fe-4d98-b9bc-7c3b7c1d4683",
             "actions": [
                 {
-                    "name": "Move",
-                    "type": "Button",
-                    "id": "d55f98d5-b261-4a7b-be4d-88d4ada2857f",
-                    "expectedControlType": "",
+                    "name": "Steer",
+                    "type": "Value",
+                    "id": "159d7fd2-973f-4261-9bc9-da404c162e25",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Break",
-                    "type": "Button",
-                    "id": "7e982439-ff3f-4a95-a9ec-336638e6c928",
-                    "expectedControlType": "",
+                    "name": "Gas",
+                    "type": "Value",
+                    "id": "d93b42e7-1381-432b-92b7-23e5c7fe9a7c",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
-                    "name": "TurnLeft",
-                    "type": "Button",
-                    "id": "dfc81d9e-46af-4244-9d6d-f71e6d655e3d",
-                    "expectedControlType": "",
+                    "name": "Poke",
+                    "type": "Value",
+                    "id": "8bfb7f94-d70f-4aab-904b-d2ff882cddbd",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TurnRight",
-                    "type": "Button",
-                    "id": "b264cd4c-f13c-4885-bdde-5fb3c9ad8ebc",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Drift",
-                    "type": "Button",
-                    "id": "ffa8aec0-2159-4802-be08-1426b194cb5f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "a6fc57b2-7c24-4c04-9282-6ca0a6ea6303",
-                    "path": "<Keyboard>/w",
+                    "id": "0be2c444-f0cf-42e7-aa7a-c20424601456",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/stick/x",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";KeyBoard",
-                    "action": "Move",
+                    "groups": ";RaceWheel",
+                    "action": "Steer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d9077891-371a-4fee-9610-77be65979f22",
-                    "path": "<XInputController>/buttonEast",
+                    "id": "95fb2fe5-53ec-42d9-95f6-300aa607f455",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/z",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";XboxController",
-                    "action": "Move",
+                    "groups": ";RaceWheel",
+                    "action": "Gas",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "6e1a7f16-4251-43fd-9494-e2f5a5e38ac9",
-                    "path": "<Keyboard>/space",
+                    "id": "b273cb1e-fd38-4ad4-8325-1383fe1c6c55",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button19",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";KeyBoard",
-                    "action": "Break",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "14ad2a46-c967-4346-af0e-94aeb6ad969a",
-                    "path": "<XInputController>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";XboxController",
-                    "action": "Break",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "93b478f9-e87f-4058-84de-976e1c719cbb",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";KeyBoard",
-                    "action": "TurnLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1cc2b61c-6003-4fe0-ba62-eddec842c54e",
-                    "path": "<XInputController>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";XboxController",
-                    "action": "TurnLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6bdc658a-abce-4e72-a92d-311a717a9ef9",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";KeyBoard",
-                    "action": "TurnRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dbef5da4-8900-4fe6-9bbd-9d2b74fde026",
-                    "path": "<XInputController>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";XboxController",
-                    "action": "TurnRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e1233ba8-de22-456a-85ea-8555bea03f23",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";KeyBoard",
-                    "action": "Drift",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6f6e6268-5a35-485a-a019-fb750582a8c9",
-                    "path": "<XInputController>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";XboxController",
-                    "action": "Drift",
+                    "groups": "",
+                    "action": "Poke",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -188,6 +93,17 @@
             "devices": [
                 {
                     "devicePath": "<XInputController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "RaceWheel",
+            "bindingGroup": "RaceWheel",
+            "devices": [
+                {
+                    "devicePath": "<HID::Logitech G29 Driving Force Racing Wheel>",
                     "isOptional": false,
                     "isOR": false
                 }
