@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6647210657093557415
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.1897936
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.8997202
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.7416
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7945235868321726326, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d713cdd68363e149908216ab59d845e, type: 2}
+    - target: {fileID: -7401950152136065622, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d713cdd68363e149908216ab59d845e, type: 2}
+    - target: {fileID: -6387225571040160212, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d713cdd68363e149908216ab59d845e, type: 2}
+    - target: {fileID: -2696740748505971405, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d713cdd68363e149908216ab59d845e, type: 2}
+    - target: {fileID: -85230676332548892, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d713cdd68363e149908216ab59d845e, type: 2}
+    - target: {fileID: 919132149155446097, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: m_Name
+      value: low polly medicine cabinet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239551909251847647, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d713cdd68363e149908216ab59d845e, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dbb2e3160caa5604e9705291642b408f, type: 3}
