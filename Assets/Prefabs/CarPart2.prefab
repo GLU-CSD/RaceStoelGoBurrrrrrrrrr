@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 6563425838745734070}
   m_Layer: 0
   m_Name: CarPart2
-  m_TagString: Untagged
+  m_TagString: AICar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,7 +264,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1500
   m_Drag: 0
-  m_AngularDrag: 1
+  m_AngularDrag: 0.1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -280,7 +280,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &938900544948487363
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -298,7 +298,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -315,19 +315,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gasButton: {fileID: -5318216816403929120, guid: 90c361a11fab6e64bb9d1e4cde53fc3f, type: 3}
-  steer: {fileID: -6297753578976871402, guid: 90c361a11fab6e64bb9d1e4cde53fc3f, type: 3}
   poke: {fileID: -1911563438641953188, guid: 90c361a11fab6e64bb9d1e4cde53fc3f, type: 3}
-  breakButton: {fileID: -6162499001262288254, guid: 90c361a11fab6e64bb9d1e4cde53fc3f, type: 3}
-  rb: {fileID: 0}
-  carBody: {fileID: 8288131041244673379}
-  frontLeftWheel: {fileID: 4731433219405740048}
-  frontRightWheel: {fileID: 1325022956568182476}
-  backLeftWheel: {fileID: 6703358202613310663}
-  backRightWheel: {fileID: 6975751827781352162}
+  steer: {fileID: -6297753578976871402, guid: 90c361a11fab6e64bb9d1e4cde53fc3f, type: 3}
+  brakeButton: {fileID: -6162499001262288254, guid: 90c361a11fab6e64bb9d1e4cde53fc3f, type: 3}
+  rb: {fileID: 7021660701420471334}
   steeringWheelModel: {fileID: 8442812349054611564}
   steeringWheelRotation: 450
-  antiRollForce: 8000
-  downForceStrength: 40
+  maxSpeed: 300
+  forwardForce: 30000
+  brakeForce: 50000
+  maxSteerAngle: 25
+  steerSmooth: 5
+  sideFriction: 0.9
+  downforce: 50
 --- !u!1 &2367703838982060931
 GameObject:
   m_ObjectHideFlags: 0
