@@ -4,7 +4,7 @@ using UnityEngine;
 public class Countdown : MonoBehaviour
 {
     [SerializeField] private RaceCarAI[] raceCarAIs;
-    [SerializeField] private CarMovement1 carMovement;
+    [SerializeField] private RealisticCarMovementG29 carMovement;
     [SerializeField] private TextMeshProUGUI countdownText;
     private float countdown = 4;
     private void Update()
