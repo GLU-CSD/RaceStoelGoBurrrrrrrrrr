@@ -1,126 +1,98 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CarMovement1 : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class RealisticCarMovementG29 : MonoBehaviour
 {
-    [Header("Input actions")]
+    [Header("Input Actions")]
     [SerializeField] private InputActionReference gasButton;
+    [SerializeField] private InputActionReference poke;       // voor achteruit rijden (toggle)
     [SerializeField] private InputActionReference steer;
-    [SerializeField] private InputActionReference poke;
-    [SerializeField] private InputActionReference breakButton;
+    [SerializeField] private InputActionReference brakeButton;
 
-    [Header("Car Body")]
+    [Header("Car Settings")]
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private GameObject carBody;
-
-    [Header("Car Wheels")]
-    [SerializeField] private Transform frontLeftWheel;
-    [SerializeField] private Transform frontRightWheel;
-    [SerializeField] private Transform backLeftWheel;
-    [SerializeField] private Transform backRightWheel;
-
-    [Header("Steering Wheel Visual")]
     [SerializeField] private Transform steeringWheelModel;
     [SerializeField] private float steeringWheelRotation = 450f;
 
-    // Movement
-    private float gasValue;
-    private float steerValue;
-    private float pokeValue;
-    private float breakValue;
+    [Header("Movement")]
+    [SerializeField] private float maxSpeed = 30f;
+    [SerializeField] private float forwardForce = 300f;
+    [SerializeField] private float brakeForce = 500f;
+    [SerializeField] private float maxSteerAngle = 25f;
+    [SerializeField] private float steerSmooth = 5f;
+    [SerializeField] private float sideFriction = 0.9f;  // voorkomt sliding
+    [SerializeField] private float downforce = 50f;
 
-    private float maxSteerAngle = 60f;
-    private float carSpeed = 5f;
+    private float currentSteerAngle = 0f;
 
-    // Anti-roll
-    [SerializeField] private float antiRollForce = 8000f; // verhoogd
-
-    // Downforce
-    [SerializeField] private float downForceStrength = 40f;
+    private bool isReversing = false;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
-        // Lager zwaartepunt = auto valt niet om
-        rb.centerOfMass = new Vector3(0f, -1.0f, 0f); // lager dan voorheen
+        if (!rb) rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = new Vector3(0f, -1f, 0f); // lager zwaartepunt voor stabiliteit
     }
 
     private void FixedUpdate()
     {
-        // Inputs lezen
-        steerValue = steer.action.ReadValue<float>();
-        gasValue = gasButton.action.ReadValue<float>();
-        pokeValue = poke.action.ReadValue<float>();
-        breakValue = breakButton.action.ReadValue<float>();
+        float gas = 1f - gasButton.action.ReadValue<float>();
+        float pokeValue = poke.action.ReadValue<float>();
+        float brake = 1f - brakeButton.action.ReadValue<float>();
+        float steerInput = steer.action.ReadValue<float>();
 
-        // G29 pedalen omkeren
-        gasValue = 1f - gasValue;
-        breakValue = 1f - breakValue;
+        // Check of we in reverse staan
+        isReversing = pokeValue > 0.1f;
 
-        // Stuur animatie
+        // Stuurwiel visueel
         if (steeringWheelModel != null)
-        {
-            float wheelRot = steerValue * steeringWheelRotation;
-            steeringWheelModel.localRotation = Quaternion.Euler(0, 0, 180 - wheelRot);
-        }
+            steeringWheelModel.localRotation = Quaternion.Euler(0, 0, 180 - steerInput * steeringWheelRotation);
 
-        // Sturen
-        transform.Rotate(0, steerValue * maxSteerAngle * 0.1f, 0f);
-
-        // Vooruit / achteruit
-        if (pokeValue == 0)
-            rb.linearVelocity += transform.forward * (gasValue / 4f);
-        else
-            rb.linearVelocity += transform.forward * -(gasValue / 4f);
-
-        // Remmen
-        if (breakValue > 0.05f)
-        {
-            float brakeStrength = 20f;
-            Vector3 brakeForce = -rb.linearVelocity.normalized * brakeStrength * breakValue;
-
-            // Niet reverse gaan door remmen
-            if (Vector3.Dot(rb.linearVelocity, brakeForce) < 0)
-                rb.linearVelocity += brakeForce * Time.fixedDeltaTime;
-        }
-
-        // Anti-roll
-        ApplyAntiRoll(frontLeftWheel, frontRightWheel);
-        ApplyAntiRoll(backLeftWheel, backRightWheel);
-
-        // Minder drift (meer grip op de zijkant)
-        float sideGrip = 4f; // hoger = minder drift
-        Vector3 localVel = transform.InverseTransformDirection(rb.linearVelocity);
-
-        // Rem de X-snelheid (zijwaarts glijden)
-        localVel.x /= (1f + sideGrip * Time.fixedDeltaTime);
-
-        // Terugzetten
-        rb.linearVelocity = transform.TransformDirection(localVel);
-
-        // Downforce zodat de auto op de grond blijft
-        rb.AddForce(-transform.up * downForceStrength * rb.linearVelocity.magnitude);
-
-        // Extra grip tegen springen
-        rb.AddForce(Vector3.down * 5f, ForceMode.Acceleration);
+        ApplySteering(steerInput);
+        ApplyMovement(gas, brake);
+        ApplyStability();
+        ApplyDownforce();
+        LimitMaxSpeed();
     }
 
-    // Houdt de auto recht tijdens bochten
-    private void ApplyAntiRoll(Transform wheelL, Transform wheelR)
+    private void ApplySteering(float steerInput)
     {
-        bool groundedL = Physics.Raycast(wheelL.position, -transform.up, out RaycastHit hitL, 0.6f);
-        bool groundedR = Physics.Raycast(wheelR.position, -transform.up, out RaycastHit hitR, 0.6f);
+        float speedFactor = Mathf.Clamp(rb.linearVelocity.magnitude / maxSpeed, 0f, 1f);
+        float targetSteer = steerInput * maxSteerAngle * speedFactor;
+        currentSteerAngle = Mathf.Lerp(currentSteerAngle, targetSteer, Time.fixedDeltaTime * steerSmooth);
 
-        float travelL = groundedL ? (0.6f - hitL.distance) / 0.6f : 1f;
-        float travelR = groundedR ? (0.6f - hitR.distance) / 0.6f : 1f;
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, currentSteerAngle, 0f));
+    }
 
-        float antiRoll = (travelL - travelR) * antiRollForce;
+    private void ApplyMovement(float gas, float brake)
+    {
+        // Vooruit of achteruit afhankelijk van isReversing
+        float moveDirection = isReversing ? -1f : 1f;
+        float speedFactor = 1f - rb.linearVelocity.magnitude / maxSpeed;
+        Vector3 movement = transform.forward * gas * forwardForce * Mathf.Max(speedFactor, 0.1f) * moveDirection;
+        rb.AddForce(movement, ForceMode.Force);
 
-        if (groundedL)
-            rb.AddForceAtPosition(-transform.up * antiRoll, wheelL.position);
+        // Remmen
+        if (brake > 0.05f)
+            rb.AddForce(-rb.linearVelocity.normalized * brake * brakeForce, ForceMode.Force);
+    }
 
-        if (groundedR)
-            rb.AddForceAtPosition(transform.up * antiRoll, wheelR.position);
+    private void ApplyStability()
+    {
+        // Voorkomt dat de auto teveel zijwaarts glijdt
+        Vector3 localVel = transform.InverseTransformDirection(rb.linearVelocity);
+        localVel.x *= sideFriction;
+        rb.linearVelocity = transform.TransformDirection(localVel);
+    }
+
+    private void ApplyDownforce()
+    {
+        rb.AddForce(-transform.up * downforce * rb.linearVelocity.magnitude, ForceMode.Force);
+    }
+
+    private void LimitMaxSpeed()
+    {
+        if (rb.linearVelocity.magnitude > maxSpeed)
+            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
     }
 }

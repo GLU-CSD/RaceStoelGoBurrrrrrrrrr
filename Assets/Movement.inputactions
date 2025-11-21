@@ -71,7 +71,7 @@
                     "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button19",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";RaceWheel",
                     "action": "Poke",
                     "isComposite": false,
                     "isPartOfComposite": false
