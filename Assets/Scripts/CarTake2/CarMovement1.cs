@@ -31,7 +31,7 @@ public class RealisticCarMovementG29 : MonoBehaviour
     private void Start()
     {
         if (!rb) rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0f, -1f, 0f); // lager zwaartepunt voor stabiliteit
+        rb.centerOfMass = new Vector3(0f, -0f, 0f); // lager zwaartepunt voor stabiliteit
     }
 
     private void FixedUpdate()

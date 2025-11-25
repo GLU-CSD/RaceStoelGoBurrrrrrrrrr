@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class Finish : MonoBehaviour
 {
     [SerializeField] private CheckPoints[] checkPoints;
-    private int lapCount = 1;
+    public int lapCount = 1;
 
     private void OnTriggerEnter(Collider other)
     {
