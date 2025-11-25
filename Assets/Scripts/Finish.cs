@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Finish : MonoBehaviour
 {
     [SerializeField] private CheckPoints[] checkPoints;
+    [SerializeField] private TextMeshProUGUI lapText;
     private int lapCount = 1;
 
     private void OnTriggerEnter(Collider other)
@@ -21,10 +23,15 @@ public class Finish : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                SceneManager.LoadScene(1);
-            }
+        }
+    }
+    private void Update()
+    {
+        lapText.text = "Lap:" + " " + lapCount.ToString() + "/3";
+        if (lapCount >= 4)
+        {
+            SceneManager.LoadScene(1);
+
         }
     }
 }
