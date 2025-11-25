@@ -321,10 +321,10 @@ MonoBehaviour:
   rb: {fileID: 7021660701420471334}
   steeringWheelModel: {fileID: 8442812349054611564}
   steeringWheelRotation: 450
-  maxSpeed: 300
+  maxSpeed: 50
   forwardForce: 30000
   brakeForce: 50000
-  maxSteerAngle: 25
+  maxSteerAngle: 15
   steerSmooth: 5
   sideFriction: 0.9
   downforce: 50
