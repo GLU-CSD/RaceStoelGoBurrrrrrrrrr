@@ -7,10 +7,13 @@ public class Countdown : MonoBehaviour
     [SerializeField] private RealisticCarMovementG29 carMovement;
     [SerializeField] private TextMeshProUGUI countdownText;
     private float countdown = 4;
+    private int countdownInt;
     private void Update()
     {
         countdown -= Time.deltaTime;
-        countdownText.text = countdown.ToString();
+        countdownInt = (int)countdown;
+        countdownText.text = countdownInt.ToString();
+
         if (countdown <= 0 )
         {
             for(int i = 0; i < raceCarAIs.Length; i++)
