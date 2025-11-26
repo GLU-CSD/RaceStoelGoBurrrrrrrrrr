@@ -1846,6 +1846,10 @@ PrefabInstance:
       value: AICar (2)
       objectReference: {fileID: 0}
     - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
       propertyPath: waypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -1876,7 +1880,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7191619058121162472, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 605136960}
   m_SourcePrefab: {fileID: 100100000, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
 --- !u!1 &411137427
 GameObject:
@@ -2253,7 +2260,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raceCarAIs:
-  - {fileID: 0}
+  - {fileID: 1250989146}
+  - {fileID: 605972223}
+  - {fileID: 605136956}
   carMovement: {fileID: 1482840731}
   countdownText: {fileID: 272613912}
   countdownTextObject: {fileID: 272613910}
@@ -2967,6 +2976,76 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &605136954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7191619058121162472, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+  m_PrefabInstance: {fileID: 385115174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &605136956 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+  m_PrefabInstance: {fileID: 385115174}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605136954}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112a49ed7287b5c48869de6a1f2855aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &605136960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605136954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2a416076c80dd409ca074a89fcaf59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPoints:
+  - {fileID: 1156889918}
+  - {fileID: 1109103898}
+  - {fileID: 1673341599}
+  checkpointIndex: 0
+  checkpointProgress: 0
+  totalProgress: 0
+--- !u!1 &605972221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7191619058121162472, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+  m_PrefabInstance: {fileID: 2019271433}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &605972223 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+  m_PrefabInstance: {fileID: 2019271433}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605972221}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112a49ed7287b5c48869de6a1f2855aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &605972227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605972221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2a416076c80dd409ca074a89fcaf59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPoints:
+  - {fileID: 1156889918}
+  - {fileID: 1109103898}
+  - {fileID: 1673341599}
+  checkpointIndex: 0
+  checkpointProgress: 0
+  totalProgress: 0
 --- !u!1001 &637611056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3026,7 +3105,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 258150983161716625, guid: 68f817015304b2548a219340a3dcb4a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2146349112}
   m_SourcePrefab: {fileID: 100100000, guid: 68f817015304b2548a219340a3dcb4a4, type: 3}
 --- !u!1 &671610855
 GameObject:
@@ -5103,6 +5185,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227458175}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1250989144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7191619058121162472, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+  m_PrefabInstance: {fileID: 1485515953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1250989146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+  m_PrefabInstance: {fileID: 1485515953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250989144}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112a49ed7287b5c48869de6a1f2855aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1250989150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250989144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2a416076c80dd409ca074a89fcaf59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPoints:
+  - {fileID: 1156889918}
+  - {fileID: 1109103898}
+  - {fileID: 1673341599}
+  checkpointIndex: 0
+  checkpointProgress: 0
+  totalProgress: 0
 --- !u!1 &1261738006
 GameObject:
   m_ObjectHideFlags: 0
@@ -5680,6 +5797,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 148584056}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &1431109498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1431109500}
+  - component: {fileID: 1431109499}
+  m_Layer: 0
+  m_Name: RaceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1431109499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431109498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19d7c72da26dc7c42aca7557eab8c59e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2146349112}
+  aiCars:
+  - {fileID: 1250989150}
+  - {fileID: 605972227}
+  - {fileID: 605136960}
+  playerPosition: 0
+--- !u!4 &1431109500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431109498}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 802.517, y: 1.6596918, z: 653.58264}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1477236542
 GameObject:
   m_ObjectHideFlags: 0
@@ -5771,7 +5938,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6070108221047435104, guid: 68f817015304b2548a219340a3dcb4a4, type: 3}
   m_PrefabInstance: {fileID: 637611056}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2146349107}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcc1f8ef1b2625848b925f122ea3951a, type: 3}
@@ -5830,6 +5997,10 @@ PrefabInstance:
       value: AICar
       objectReference: {fileID: 0}
     - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
       propertyPath: waypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -5860,7 +6031,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7191619058121162472, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1250989150}
   m_SourcePrefab: {fileID: 100100000, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
 --- !u!1 &1490167912
 GameObject:
@@ -7882,6 +8056,10 @@ PrefabInstance:
       value: AICar (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
       propertyPath: waypoints.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -7912,7 +8090,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7191619058121162472, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 605972227}
   m_SourcePrefab: {fileID: 100100000, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
 --- !u!4 &2084905516 stripped
 Transform:
@@ -8244,6 +8425,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 148584056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2146349107 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 258150983161716625, guid: 68f817015304b2548a219340a3dcb4a4, type: 3}
+  m_PrefabInstance: {fileID: 637611056}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2146349112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146349107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2a416076c80dd409ca074a89fcaf59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPoints:
+  - {fileID: 1156889918}
+  - {fileID: 1109103898}
+  - {fileID: 1673341599}
+  checkpointIndex: 0
+  checkpointProgress: 0
+  totalProgress: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -8263,3 +8468,4 @@ SceneRoots:
   - {fileID: 1485515953}
   - {fileID: 2019271433}
   - {fileID: 385115174}
+  - {fileID: 1431109500}
