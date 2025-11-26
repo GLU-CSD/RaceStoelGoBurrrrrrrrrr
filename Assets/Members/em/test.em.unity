@@ -228,75 +228,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &613212071
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.24
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.7779584
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.412
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7392226706354756984, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: a8bd32f00c6f0754e8fd100acacdb07e, type: 2}
-    - target: {fileID: 919132149155446097, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: m_Name
-      value: vendingmachine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7660506595801994687, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 08c0f8ea16516224f80b6bd91d3ad18e, type: 2}
-    - target: {fileID: 7715825335960252686, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 08c0f8ea16516224f80b6bd91d3ad18e, type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
 --- !u!1 &746732290
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +474,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14dae2ab261d0eb48ba3f968243be284, type: 3}
+--- !u!1001 &1431233371778852595
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2832840707390931296, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832840707390931296, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7779584
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832840707390931296, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.412
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832840707390931296, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832840707390931296, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832840707390931296, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832840707390931296, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832840707390931296, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832840707390931296, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832840707390931296, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178298003483909082, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
+      propertyPath: m_Name
+      value: vendingmachine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f0febd6c6a546974c85e390960e0d11e, type: 3}
 --- !u!1001 &2293829998905250232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1247,4 +1235,4 @@ SceneRoots:
   - {fileID: 4109382259610381471}
   - {fileID: 4830665015368700474}
   - {fileID: 8663446036386290929}
-  - {fileID: 613212071}
+  - {fileID: 1431233371778852595}
