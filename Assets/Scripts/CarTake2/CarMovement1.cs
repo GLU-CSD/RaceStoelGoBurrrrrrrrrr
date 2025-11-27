@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -15,23 +15,35 @@ public class RealisticCarMovementG29 : MonoBehaviour
     [SerializeField] private Transform steeringWheelModel;
     [SerializeField] private float steeringWheelRotation = 450f;
 
+    [Header("Pedal Models")]
+    [SerializeField] private Transform gasPedalModel;
+    [SerializeField] private Transform brakePedalModel;
+    [SerializeField] private Transform pokePedalModel;
+
+    [Header("Pedal Rotation Settings")]
+    [SerializeField] private float pedalPressRotation = 20f;  // hoeveel graden een pedaal maximaal draait
+    [SerializeField] private float pokeRotation = 25f;         // hoeveel graden de shifter beweegt
+
+    // Jouw echte rustrotaties
+    private const float GAS_BRAKE_BASE_X = -154.125f;
+    private const float POKE_BASE_X = -89.98f;
+
     [Header("Movement")]
     [SerializeField] private float maxSpeed = 30f;
     [SerializeField] private float forwardForce = 300f;
     [SerializeField] private float brakeForce = 500f;
     [SerializeField] private float maxSteerAngle = 25f;
     [SerializeField] private float steerSmooth = 5f;
-    [SerializeField] private float sideFriction = 0.9f;  // voorkomt sliding
+    [SerializeField] private float sideFriction = 0.9f;
     [SerializeField] private float downforce = 50f;
 
     private float currentSteerAngle = 0f;
-
     private bool isReversing = false;
 
     private void Start()
     {
         if (!rb) rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0f, -0f, 0f); // lager zwaartepunt voor stabiliteit
+        rb.centerOfMass = new Vector3(0f, -0f, 0f);
     }
 
     private void FixedUpdate()
@@ -41,12 +53,10 @@ public class RealisticCarMovementG29 : MonoBehaviour
         float brake = 1f - brakeButton.action.ReadValue<float>();
         float steerInput = steer.action.ReadValue<float>();
 
-        // Check of we in reverse staan
         isReversing = pokeValue > 0.1f;
 
-        // Stuurwiel visueel
-        if (steeringWheelModel != null)
-            steeringWheelModel.localRotation = Quaternion.Euler(0, 0, 180 - steerInput * steeringWheelRotation);
+        UpdateSteeringWheel(steerInput);
+        UpdatePedals(gas, brake, pokeValue);
 
         ApplySteering(steerInput);
         ApplyMovement(gas, brake);
@@ -55,10 +65,44 @@ public class RealisticCarMovementG29 : MonoBehaviour
         LimitMaxSpeed();
     }
 
+    private void UpdateSteeringWheel(float steerInput)
+    {
+        if (steeringWheelModel != null)
+            steeringWheelModel.localRotation = Quaternion.Euler(0, 0, 180 - steerInput * steeringWheelRotation);
+    }
+
+    private void UpdatePedals(float gas, float brake, float pokeValue)
+    {
+        // Gaspedaal
+        if (gasPedalModel != null)
+        {
+            float rot = GAS_BRAKE_BASE_X + gas * pedalPressRotation;
+            gasPedalModel.localRotation = Quaternion.Euler(rot, 0, 0);
+        }
+
+        // Rempedaal
+        if (brakePedalModel != null)
+        {
+            float rot = GAS_BRAKE_BASE_X + brake * pedalPressRotation;
+            brakePedalModel.localRotation = Quaternion.Euler(rot, 0, 0);
+        }
+
+        // Shifter / poke – toggle
+        if (pokePedalModel != null)
+        {
+            float rot = POKE_BASE_X + (pokeValue > 0.1f ? pokeRotation : 0f);
+            pokePedalModel.localRotation = Quaternion.Euler(rot, 0, 0);
+        }
+    }
+
     private void ApplySteering(float steerInput)
     {
+        if (isReversing)
+            steerInput *= -1f;
+
         float speedFactor = Mathf.Clamp(rb.linearVelocity.magnitude / maxSpeed, 0f, 1f);
         float targetSteer = steerInput * maxSteerAngle * speedFactor;
+
         currentSteerAngle = Mathf.Lerp(currentSteerAngle, targetSteer, Time.fixedDeltaTime * steerSmooth);
 
         rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, currentSteerAngle, 0f));
@@ -66,20 +110,18 @@ public class RealisticCarMovementG29 : MonoBehaviour
 
     private void ApplyMovement(float gas, float brake)
     {
-        // Vooruit of achteruit afhankelijk van isReversing
         float moveDirection = isReversing ? -1f : 1f;
         float speedFactor = 1f - rb.linearVelocity.magnitude / maxSpeed;
         Vector3 movement = transform.forward * gas * forwardForce * Mathf.Max(speedFactor, 0.1f) * moveDirection;
+
         rb.AddForce(movement, ForceMode.Force);
 
-        // Remmen
         if (brake > 0.05f)
             rb.AddForce(-rb.linearVelocity.normalized * brake * brakeForce, ForceMode.Force);
     }
 
     private void ApplyStability()
     {
-        // Voorkomt dat de auto teveel zijwaarts glijdt
         Vector3 localVel = transform.InverseTransformDirection(rb.linearVelocity);
         localVel.x *= sideFriction;
         rb.linearVelocity = transform.TransformDirection(localVel);
