@@ -2332,6 +2332,7 @@ MonoBehaviour:
   carMovement: {fileID: 1482840731}
   countdownText: {fileID: 272613912}
   countdownTextObject: {fileID: 272613910}
+  abandonShip: {fileID: 0}
 --- !u!1 &455104701
 GameObject:
   m_ObjectHideFlags: 0
