@@ -1,139 +1,153 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
-public class EngineSoundSystem : MonoBehaviour
+public class EngineMultiLayerEngine : MonoBehaviour
 {
     [Header("RPM Settings")]
-    public float minRPM = 1000f;
+    public float idleRPM = 1000f;
     public float maxRPM = 9000f;
     public float currentRPM = 1000f;
-    public float rpmSmoothing = 5f;
-
-    [Header("Input (New Input System)")]
-    public InputAction throttleInput; // 0 = no gas, 1 = full gas
+    public float rpmIncreaseRate = 5000f;      // how fast RPM rises
+    public float rpmDecreaseRate = 3000f;      // how fast RPM falls
 
     [Header("Gears")]
-    public int currentGear = 1;
+    public int gear = 1;
+    public int maxGear = 6;
     public float[] gearRatios = { 2.8f, 2.1f, 1.6f, 1.3f, 1.1f, 0.9f };
-    public float shiftCooldown = 0.6f;
+    public float shiftUpRPM = 8000f;
+    public float shiftDownRPM = 1500f;
+    public float shiftCooldown = 0.5f;
     private float lastShiftTime;
 
-    [Header("Audio")]
-    public AudioSource sourceA;
-    public AudioSource sourceB;
-    public AudioClip[] rpmClips;
+    [Header("Audio (17 clips + 17 sources)")]
+    public AudioClip[] rpmClips;           // 17 engine samples
+    public AudioSource[] audioSources;     // 17 AudioSources
+    public float rpmStep = 500f;
+    public float fadeSpeed = 8f;
 
-    private bool usingA = true;
-    private int lastClipIndex = -1;
+    private float[] clipRPMs;
+
+    [Header("Input")]
+    public bool useNewInputSystem = true;
+
+    // ⭐️ REPLACED WITH InputActionReference AS REQUESTED ⭐️
+    [SerializeField] private InputActionReference throttleAction;
 
     private void OnEnable()
     {
-        throttleInput.Enable();
+        if (useNewInputSystem && throttleAction != null)
+            throttleAction.action.Enable();
     }
 
     private void OnDisable()
     {
-        throttleInput.Disable();
+        if (useNewInputSystem && throttleAction != null)
+            throttleAction.action.Disable();
     }
 
-    private void Start()
+    void Start()
     {
-        // Start both audio sources muted
-        sourceA.volume = 0f;
-        sourceB.volume = 0f;
+        clipRPMs = new float[rpmClips.Length];
 
-        // Play initial clip to avoid silence
-        if (rpmClips.Length > 0)
+        for (int i = 0; i < rpmClips.Length; i++)
         {
-            sourceA.clip = rpmClips[0];
-            sourceA.Play();
+            clipRPMs[i] = idleRPM + i * rpmStep;
+
+            audioSources[i].clip = rpmClips[i];
+            audioSources[i].loop = true;
+            audioSources[i].volume = 0f;
+            audioSources[i].pitch = 1f;
+            audioSources[i].Play();
         }
     }
 
-    private void Update()
+    void Update()
     {
-        UpdateRPM();
-        UpdateEngineSound();
+        float throttle = GetThrottle();
+
+        UpdateRPM(throttle);
+        UpdateGears();
+        UpdateEngineLayers();
     }
 
-    private void UpdateRPM()
+    // -------------------------------
+    // INPUT HANDLING
+    // -------------------------------
+    float GetThrottle()
     {
-        float throttle = throttleInput.ReadValue<float>(); // NEW INPUT SYSTEM
-
-        // Target RPM based on throttle
-        float targetRPM = Mathf.Lerp(minRPM, maxRPM, throttle);
-
-        // Apply gear ratio
-        targetRPM *= gearRatios[currentGear - 1];
-
-        // Clamp
-        targetRPM = Mathf.Clamp(targetRPM, minRPM, maxRPM);
-
-        // Smooth RPM movement
-        currentRPM = Mathf.Lerp(currentRPM, targetRPM, Time.deltaTime * rpmSmoothing);
-
-        // --- Auto Shifting ---
-        if (Time.time > lastShiftTime + shiftCooldown)
+        if (useNewInputSystem)
         {
-            // Upshift (when near redline)
-            if (currentRPM > maxRPM * 0.92f && currentGear < gearRatios.Length)
-            {
-                currentGear++;
-                currentRPM *= 0.55f;  // RPM drop for realism
-                lastShiftTime = Time.time;
-            }
-            // Downshift (if RPM too low)
-            else if (currentRPM < minRPM * 1.15f && currentGear > 1)
-            {
-                currentGear--;
-                currentRPM *= 1.45f;
-                lastShiftTime = Time.time;
-            }
+            if (throttleAction == null || throttleAction.action == null)
+                return 0f;
+
+            return throttleAction.action.ReadValue<float>();
+        }
+        else
+        {
+            return Input.GetKey(KeyCode.W) ? 1f : 0f;
         }
     }
 
-    private void UpdateEngineSound()
+    // -------------------------------
+    // RPM SIMULATION
+    // -------------------------------
+    void UpdateRPM(float throttle)
     {
-        if (rpmClips == null || rpmClips.Length == 0)
-            return;
+        if (throttle > 0)
+            currentRPM += throttle * rpmIncreaseRate * Time.deltaTime * gearRatios[gear - 1];
+        else
+            currentRPM -= rpmDecreaseRate * Time.deltaTime;
 
-        float normalized = (currentRPM - minRPM) / (maxRPM - minRPM);
-        normalized = Mathf.Clamp01(normalized);
-
-        // determine which clip to use (0–16)
-        int clipIndex = Mathf.FloorToInt(normalized * (rpmClips.Length - 1));
-        clipIndex = Mathf.Clamp(clipIndex, 0, rpmClips.Length - 1);
-
-        if (clipIndex == lastClipIndex)
-            return;
-
-        // Select audio sources
-        AudioSource next = usingA ? sourceB : sourceA;
-        AudioSource current = usingA ? sourceA : sourceB;
-
-        next.clip = rpmClips[clipIndex];
-        next.volume = 0f;
-        next.Play();
-
-        StartCoroutine(Crossfade(current, next));
-
-        usingA = !usingA;
-        lastClipIndex = clipIndex;
+        currentRPM = Mathf.Clamp(currentRPM, idleRPM, maxRPM);
     }
 
-    private IEnumerator Crossfade(AudioSource from, AudioSource to)
+    // -------------------------------
+    // AUTO TRANSMISSION
+    // -------------------------------
+    void UpdateGears()
     {
-        float t = 0;
+        if (Time.time < lastShiftTime + shiftCooldown) return;
 
-        while (t < 1f)
+        if (currentRPM > shiftUpRPM && gear < maxGear)
         {
-            t += Time.deltaTime * 5f; // fade speed (adjustable)
-            from.volume = Mathf.Lerp(1f, 0f, t);
-            to.volume = Mathf.Lerp(0f, 1f, t);
-            yield return null;
+            gear++;
+            currentRPM *= 0.6f;  // RPM drop
+            lastShiftTime = Time.time;
         }
+        else if (currentRPM < shiftDownRPM && gear > 1)
+        {
+            gear--;
+            currentRPM *= 1.3f;
+            lastShiftTime = Time.time;
+        }
+    }
 
-        from.Stop();
+    // -------------------------------
+    // ENGINE SOUND LAYER SYSTEM
+    // -------------------------------
+    void UpdateEngineLayers()
+    {
+        for (int i = 0; i < audioSources.Length; i++)
+        {
+            float clipRPM = clipRPMs[i];
+            float rpmDifference = Mathf.Abs(currentRPM - clipRPM);
+
+            float targetVolume = (rpmDifference < rpmStep)
+                ? rpmStep / (rpmDifference + rpmStep)
+                : 0f;
+
+            audioSources[i].volume = Mathf.Lerp(
+                audioSources[i].volume,
+                targetVolume,
+                Time.deltaTime * fadeSpeed
+            );
+
+            float targetPitch = currentRPM / clipRPM;
+            audioSources[i].pitch = Mathf.Lerp(
+                audioSources[i].pitch,
+                targetPitch,
+                Time.deltaTime * fadeSpeed
+            );
+        }
     }
 }

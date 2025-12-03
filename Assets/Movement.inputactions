@@ -85,6 +85,17 @@
                 },
                 {
                     "name": "",
+                    "id": "9490b586-7ca3-407e-b289-1961ca28e196",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyBoard",
+                    "action": "Gas",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b273cb1e-fd38-4ad4-8325-1383fe1c6c55",
                     "path": "<HID::Logitech G29 Driving Force Racing Wheel>/button19",
                     "interactions": "",
