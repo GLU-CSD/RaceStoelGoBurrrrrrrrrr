@@ -115,24 +115,10 @@ MonoBehaviour:
   - {fileID: 2381095058832843235}
   rpmStep: 500
   fadeSpeed: 8
-  useNewInputSystem: 1
-  throttleAction:
-    m_Name: Throttle
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: ccd62481-3be5-4f5e-bd0f-652de7e76061
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 41b1b258-a190-47db-8ab9-5028cc516620
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Throttle
-      m_Flags: 0
-    m_Flags: 0
+  bovSource: {fileID: 0}
+  bovClip: {fileID: 8300000, guid: 76624d5fee410ba4a935eef4943e03bb, type: 3}
+  bovCooldown: 0.15
+  throttleInput: {fileID: 0}
 --- !u!82 &5653007593501067857
 AudioSource:
   m_ObjectHideFlags: 0
