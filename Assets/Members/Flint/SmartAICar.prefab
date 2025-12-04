@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5887483792959514164}
-  - component: {fileID: 712628046824470084}
   - component: {fileID: 2767463518945942167}
   - component: {fileID: 5828659306296618418}
   - component: {fileID: 1947468246864340485}
@@ -36,28 +35,6 @@ Transform:
   - {fileID: 5986966198656391520}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!195 &712628046824470084
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7191619058121162472}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 1.25
-  m_Speed: 20
-  m_Acceleration: 20
-  avoidancePriority: 50
-  m_AngularSpeed: 60
-  m_StoppingDistance: 3
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.25
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!54 &2767463518945942167
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -119,10 +96,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineGenerator: {fileID: 0}
-  lookAhead: 10
-  speed: 20
+  baseSpeed: 20
   turnSpeed: 4
+  lookAhead: 10
   offset: 0
+  player: {fileID: 0}
+  rubberStrength: 0.5
+  maxBoost: 1.6
+  maxSlow: 0.6
 --- !u!1001 &5569541968787321123
 PrefabInstance:
   m_ObjectHideFlags: 0
