@@ -36,6 +36,7 @@ public class RealisticCarMovementG29 : MonoBehaviour
     [SerializeField] private float steerSmooth = 5f;
     [SerializeField] private float sideFriction = 0.9f;
     [SerializeField] private float downforce = 50f;
+    private float currentSpeed;
 
     private float currentSteerAngle = 0f;
     private bool isReversing = false;
@@ -111,8 +112,8 @@ public class RealisticCarMovementG29 : MonoBehaviour
     private void ApplyMovement(float gas, float brake)
     {
         float moveDirection = isReversing ? -1f : 1f;
-        float speedFactor = 1f - rb.linearVelocity.magnitude / maxSpeed;
-        Vector3 movement = transform.forward * gas * forwardForce * Mathf.Max(speedFactor, 0.1f) * moveDirection;
+        currentSpeed = 1f - rb.linearVelocity.magnitude / maxSpeed;
+        Vector3 movement = transform.forward * gas * forwardForce * Mathf.Max(currentSpeed, 0.1f) * moveDirection;
 
         rb.AddForce(movement, ForceMode.Force);
 
