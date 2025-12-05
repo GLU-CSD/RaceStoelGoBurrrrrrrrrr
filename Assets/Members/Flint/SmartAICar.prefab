@@ -95,15 +95,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92cb99db353d3d8469f978ca074b8552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineGenerator: {fileID: 0}
-  baseSpeed: 20
-  turnSpeed: 4
-  lookAhead: 10
-  offset: 0
-  player: {fileID: 0}
-  rubberStrength: 0.5
-  maxBoost: 1.6
-  maxSlow: 0.6
+  moveSpeed: 10
+  turnSpeed: 10
+  forwardCheck: 10
+  angleCheck: 15
+  angle: 35
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  steerSmooth: 5
 --- !u!1001 &5569541968787321123
 PrefabInstance:
   m_ObjectHideFlags: 0

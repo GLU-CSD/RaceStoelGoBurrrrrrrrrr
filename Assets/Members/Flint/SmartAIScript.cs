@@ -1,110 +1,80 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class SmartRaceCarAI : MonoBehaviour
 {
-    public RaceLineGenerator lineGenerator;
-    public Transform player;
-    public float baseSpeed = 20f;
-    public float lookAhead = 6f; // kleiner voor stabielere bochten
+    public float moveSpeed = 10f;
     public float turnSpeed = 5f;
-    public float offsetRange = 0.8f; // smaller offset
-    public float rubberStrength = 0.5f;
-    public float maxBoost = 1.6f;
-    public float maxSlow = 0.6f;
+
+    public float forwardCheck = 5f;
+    public float angleCheck = 4f;
+    public float angle = 35f;
+
+    public LayerMask obstacleMask;
 
     private Rigidbody rb;
-    private Vector3[] raceLine;
-    private int index = 0;
-    private float offset;
+
+    // NEW: smooth steering
+    private float targetSteer = 0f;
+    private float currentSteer = 0f;
+    public float steerSmooth = 5f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if (lineGenerator == null) return;
-
-        lineGenerator.GenerateRaceLine();
-        raceLine = lineGenerator.raceLinePoints;
-
-        offset = Random.Range(-offsetRange, offsetRange);
     }
 
     void FixedUpdate()
     {
-        if (raceLine == null || raceLine.Length == 0) return;
+        Vector3 origin = transform.position + Vector3.up * 0.5f;
 
-        index = GetClosestIndex();
-        float lookIndex = (index + lookAhead) % raceLine.Length;
+        bool frontBlocked = Physics.Raycast(origin, transform.forward, forwardCheck, obstacleMask);
 
-        Vector3 target = GetInterpolatedPoint(lookIndex) + transform.right * offset;
+        Vector3 leftDir = Quaternion.AngleAxis(-angle, Vector3.up) * transform.forward;
+        Vector3 rightDir = Quaternion.AngleAxis(angle, Vector3.up) * transform.forward;
 
-        Steer(target);
+        bool leftSoonBlocked = Physics.Raycast(origin, leftDir, angleCheck, obstacleMask);
+        bool rightSoonBlocked = Physics.Raycast(origin, rightDir, angleCheck, obstacleMask);
 
-        float speed = ApplyRubberBanding(baseSpeed);
-        ApplyDriving(target, speed);
-    }
+        float steer = 0f;
 
-    void Steer(Vector3 target)
-    {
-        Vector3 dir = (target - transform.position).normalized;
-        Quaternion rot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.fixedDeltaTime * turnSpeed);
-    }
-
-    void ApplyDriving(Vector3 target, float speed)
-    {
-        float curve = Vector3.Angle(transform.forward, (target - transform.position).normalized);
-        float speedMultiplier = Mathf.Lerp(1f, 0.4f, Mathf.InverseLerp(0, 90, curve));
-
-        rb.AddForce(transform.forward * speed * speedMultiplier, ForceMode.Acceleration);
-    }
-
-    float ApplyRubberBanding(float speed)
-    {
-        if (player == null) return speed;
-
-        int aiProgress = index;
-        int playerProgress = GetClosestIndexTo(player.position);
-
-        float delta = Mathf.DeltaAngle(playerProgress, aiProgress);
-
-        if (delta > 10f)
+        // --------- DECISION LOGIC ---------
+        if (frontBlocked)
         {
-            float t = Mathf.Clamp01(delta / 100f) * rubberStrength;
-            return speed * Mathf.Lerp(1f, maxBoost, t);
+            if (leftSoonBlocked && !rightSoonBlocked) steer = 1;
+            else if (!leftSoonBlocked && rightSoonBlocked) steer = -1;
+            else steer = Random.value > 0.5f ? 1 : -1;
         }
-        else if (delta < -10f)
+        else
         {
-            float t = Mathf.Clamp01(-delta / 100f) * rubberStrength;
-            return speed * Mathf.Lerp(1f, maxSlow, t);
+            if (leftSoonBlocked && !rightSoonBlocked) steer = 1;
+            else if (rightSoonBlocked && !leftSoonBlocked) steer = -1;
+            else steer = 0; // no correction needed
         }
 
-        return speed;
+        // ---------- SMOOTH STEERING ----------
+        targetSteer = steer;
+        currentSteer = Mathf.Lerp(currentSteer, targetSteer, Time.fixedDeltaTime * steerSmooth);
+
+        transform.Rotate(0, currentSteer * turnSpeed, 0);
+
+        // move forward
+        rb.MovePosition(rb.position + transform.forward * moveSpeed * Time.fixedDeltaTime);
     }
 
-    int GetClosestIndex() => GetClosestIndexTo(transform.position);
-
-    int GetClosestIndexTo(Vector3 pos)
+    void OnDrawGizmos()
     {
-        int best = 0;
-        float bestDist = Mathf.Infinity;
-        for (int i = 0; i < raceLine.Length; i++)
-        {
-            float d = (raceLine[i] - pos).sqrMagnitude;
-            if (d < bestDist)
-            {
-                bestDist = d;
-                best = i;
-            }
-        }
-        return best;
-    }
+        Vector3 origin = transform.position + Vector3.up * 0.5f;
 
-    Vector3 GetInterpolatedPoint(float t)
-    {
-        int i0 = Mathf.FloorToInt(t) % raceLine.Length;
-        int i1 = (i0 + 1) % raceLine.Length;
-        float f = t - Mathf.Floor(t);
-        return Vector3.Lerp(raceLine[i0], raceLine[i1], f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(origin, origin + transform.forward * forwardCheck);
+
+        Vector3 leftDir = Quaternion.AngleAxis(-angle, Vector3.up) * transform.forward;
+        Vector3 rightDir = Quaternion.AngleAxis(angle, Vector3.up) * transform.forward;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(origin, origin + leftDir * angleCheck);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(origin, origin + rightDir * angleCheck);
     }
 }
