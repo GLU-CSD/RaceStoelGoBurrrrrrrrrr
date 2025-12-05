@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.89
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.24
       objectReference: {fileID: 0}
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a8bd32f00c6f0754e8fd100acacdb07e, type: 2}
     - target: {fileID: 919132149155446097, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
       propertyPath: m_Name
-      value: vendingmachine
+      value: p.vendingmachine
       objectReference: {fileID: 0}
     - target: {fileID: 7660506595801994687, guid: 1cc1e39255d0b05489dbd5a989b9c0c6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
