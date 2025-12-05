@@ -7,6 +7,7 @@ public class Bomb : MonoBehaviour
     private float forwardForce = 1000;
     private float upForce = 50;
     public float timer = 2;
+    [SerializeField] private GameObject explosion;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,6 +29,7 @@ public class Bomb : MonoBehaviour
         }
         if (timer <= 0)
         {
+            Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

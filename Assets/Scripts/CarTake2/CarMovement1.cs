@@ -29,14 +29,14 @@ public class RealisticCarMovementG29 : MonoBehaviour
     private const float POKE_BASE_X = -89.98f;
 
     [Header("Movement")]
-    [SerializeField] private float maxSpeed = 30f;
     [SerializeField] private float forwardForce = 300f;
     [SerializeField] private float brakeForce = 500f;
     [SerializeField] private float maxSteerAngle = 25f;
     [SerializeField] private float steerSmooth = 5f;
     [SerializeField] private float sideFriction = 0.9f;
     [SerializeField] private float downforce = 50f;
-    private float currentSpeed;
+    public float maxSpeed = 30f;
+    public float currentSpeed;
 
     private float currentSteerAngle = 0f;
     private bool isReversing = false;
