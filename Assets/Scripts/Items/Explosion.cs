@@ -20,10 +20,11 @@ public class Explosion : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             carMovementG29 = other.GetComponent<RealisticCarMovementG29>();
+            carMovementG29.currentSpeed = 0;
         }
         else if ( other.gameObject.CompareTag("AICar"))
         {
-            raceCarAI = other.GetComponent<RaceCarAI>();
+            raceCarAI = other.GetComponent<RaceCarAI>(); 
         }
     }
 }

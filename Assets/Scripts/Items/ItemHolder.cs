@@ -13,8 +13,12 @@ public class ItemHolder : MonoBehaviour
     {
         if (useItem.action.IsPressed())
         {
-            Destroy(cloneCurrentItem);
-            Instantiate(CurrentItem, itemLaunch.transform.position, itemLaunch.transform.rotation);
+            if (cloneCurrentItem != null)
+            {
+                Destroy(cloneCurrentItem);
+                Instantiate(CurrentItem, itemLaunch.transform.position, itemLaunch.transform.rotation);
+            }
+
         }
     }
     public void SpawnItem()

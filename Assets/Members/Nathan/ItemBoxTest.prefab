@@ -123,3 +123,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 5550818737998591854, guid: f26cd25cfc9e8214792ad7c9a84e8c03, type: 3}
+  - {fileID: 702509522373668612, guid: 06cf422f5d137534da6e492e9a26d5fd, type: 3}
