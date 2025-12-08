@@ -2,79 +2,124 @@
 
 public class SmartRaceCarAI : MonoBehaviour
 {
-    public float moveSpeed = 10f;
+    [Header("Checkpoints")]
+    public Transform[] checkpoints;
+    public float checkpointReachDistance = 5f;
+    private int currentCheckpoint = 0;
+
+    [Header("Driving")]
+    public float speedMin = 10f;
+    public float speedMax = 14f;
+    private float speed;
     public float turnSpeed = 5f;
 
-    public float forwardCheck = 5f;
-    public float angleCheck = 4f;
-    public float angle = 35f;
+    [Header("Obstacle Avoidance")]
+    public LayerMask wallLayer;
+    public LayerMask carLayer;
+    public LayerMask playerLayer;
+    public float forwardDistance = 6f; // forward ray distance
+    public float sideDistance = 4f;    // side ray distance
+    [Range(0f, 1f)]
+    public float avoidanceBlend = 0.6f;
 
-    public LayerMask obstacleMask;
+    [Header("Variation")]
+    public float lateralOffsetMax = 1f;
+    private float offset;
 
     private Rigidbody rb;
-
-    // NEW: smooth steering
-    private float targetSteer = 0f;
-    private float currentSteer = 0f;
-    public float steerSmooth = 5f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        speed = Random.Range(speedMin, speedMax);
+        offset = Random.Range(-lateralOffsetMax, lateralOffsetMax);
     }
 
     void FixedUpdate()
     {
+        if (checkpoints.Length == 0 || currentCheckpoint >= checkpoints.Length) return;
+
+        Vector3 target = checkpoints[currentCheckpoint].position + transform.right * offset;
+        Vector3 dirToCheckpoint = (target - transform.position).normalized;
+
+        Vector3 finalDir = dirToCheckpoint;
+
         Vector3 origin = transform.position + Vector3.up * 0.5f;
+        RaycastHit hit;
 
-        bool frontBlocked = Physics.Raycast(origin, transform.forward, forwardCheck, obstacleMask);
+        // --- Forward check ---
+        bool forwardBlocked = Physics.Raycast(origin, transform.forward, out hit, forwardDistance, wallLayer | carLayer | playerLayer);
 
-        Vector3 leftDir = Quaternion.AngleAxis(-angle, Vector3.up) * transform.forward;
-        Vector3 rightDir = Quaternion.AngleAxis(angle, Vector3.up) * transform.forward;
+        // --- Side checks (6 rays) ---
+        float[] sideAngles = { -60f, -30f, -10f, 10f, 30f, 60f };
+        Vector3 bestDir = Vector3.zero;
+        float maxFreeDist = -1f;
 
-        bool leftSoonBlocked = Physics.Raycast(origin, leftDir, angleCheck, obstacleMask);
-        bool rightSoonBlocked = Physics.Raycast(origin, rightDir, angleCheck, obstacleMask);
-
-        float steer = 0f;
-
-        // --------- DECISION LOGIC ---------
-        if (frontBlocked)
+        foreach (float angle in sideAngles)
         {
-            if (leftSoonBlocked && !rightSoonBlocked) steer = 1;
-            else if (!leftSoonBlocked && rightSoonBlocked) steer = -1;
-            else steer = Random.value > 0.5f ? 1 : -1;
+            Vector3 dir = Quaternion.Euler(0, angle, 0) * transform.forward;
+            float freeDistance = sideDistance;
+
+            if (Physics.Raycast(origin, dir, out hit, sideDistance, wallLayer | carLayer | playerLayer))
+            {
+                freeDistance = hit.distance;
+            }
+
+            if (freeDistance > maxFreeDist)
+            {
+                maxFreeDist = freeDistance;
+                bestDir = dir;
+            }
         }
-        else
+
+        // --- Kies richting met meeste vrije ruimte ---
+        if (forwardBlocked)
         {
-            if (leftSoonBlocked && !rightSoonBlocked) steer = 1;
-            else if (rightSoonBlocked && !leftSoonBlocked) steer = -1;
-            else steer = 0; // no correction needed
+            finalDir = bestDir.normalized;
         }
 
-        // ---------- SMOOTH STEERING ----------
-        targetSteer = steer;
-        currentSteer = Mathf.Lerp(currentSteer, targetSteer, Time.fixedDeltaTime * steerSmooth);
+        // --- Blend met checkpoint richting ---
+        finalDir = ((dirToCheckpoint * (1 - avoidanceBlend)) + (finalDir * avoidanceBlend)).normalized;
 
-        transform.Rotate(0, currentSteer * turnSpeed, 0);
+        // --- Steering ---
+        if (finalDir != Vector3.zero)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(finalDir);
+            rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRot, turnSpeed * Time.fixedDeltaTime));
+        }
 
-        // move forward
-        rb.MovePosition(rb.position + transform.forward * moveSpeed * Time.fixedDeltaTime);
+        // --- Move forward ---
+        rb.MovePosition(rb.position + transform.forward * speed * Time.fixedDeltaTime);
+
+        // --- Next checkpoint ---
+        if (Vector3.Distance(transform.position, target) < checkpointReachDistance)
+            currentCheckpoint++;
     }
 
     void OnDrawGizmos()
     {
-        Vector3 origin = transform.position + Vector3.up * 0.5f;
+        if (checkpoints == null || checkpoints.Length == 0) return;
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(origin, origin + transform.forward * forwardCheck);
-
-        Vector3 leftDir = Quaternion.AngleAxis(-angle, Vector3.up) * transform.forward;
-        Vector3 rightDir = Quaternion.AngleAxis(angle, Vector3.up) * transform.forward;
-
+        // Checkpoint lines
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(origin, origin + leftDir * angleCheck);
+        for (int i = 0; i < checkpoints.Length - 1; i++)
+        {
+            if (checkpoints[i] != null && checkpoints[i + 1] != null)
+                Gizmos.DrawLine(checkpoints[i].position, checkpoints[i + 1].position);
+        }
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(origin, origin + rightDir * angleCheck);
+        // Forward ray
+        Vector3 origin = transform.position + Vector3.up * 0.5f;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(origin, origin + transform.forward * forwardDistance);
+
+        // Side rays
+        Gizmos.color = Color.cyan;
+        float[] sideAngles = { -60f, -30f, -10f, 10f, 30f, 60f };
+        foreach (float angle in sideAngles)
+        {
+            Vector3 dir = Quaternion.Euler(0, angle, 0) * transform.forward;
+            Gizmos.DrawLine(origin, origin + dir * sideDistance);
+        }
     }
 }
