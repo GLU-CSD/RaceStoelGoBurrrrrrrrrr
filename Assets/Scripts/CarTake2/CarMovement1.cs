@@ -102,7 +102,7 @@ public class RealisticCarMovementG29 : MonoBehaviour
             steerInput *= -1f;
 
         //float speedFactor = Mathf.Clamp(rb.linearVelocity.magnitude / maxSpeed, 0f, 1f);
-        float targetSteer = steerInput * maxSteerAngle;
+        float targetSteer = steerInput * maxSteerAngle / 8;
 
         currentSteerAngle = Mathf.Lerp(currentSteerAngle, targetSteer, Time.fixedDeltaTime * steerSmooth);
 
