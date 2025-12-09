@@ -5061,6 +5061,7 @@ MonoBehaviour:
   - {fileID: 1109103899}
   - {fileID: 1673341600}
   lapText: {fileID: 1109738616}
+  playerUI: {fileID: 872315254}
 --- !u!1 &991081061
 GameObject:
   m_ObjectHideFlags: 0
