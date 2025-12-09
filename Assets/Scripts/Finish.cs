@@ -31,7 +31,7 @@ public class Finish : MonoBehaviour
         lapText.text = "Lap:" + " " + lapCount.ToString() + "/3";
         if (lapCount >= 4)
         {
-            GameObject.FindGameObjectWithTag("PlayerIU").SetActive(true);
+            GameObject.FindGameObjectWithTag("PlayerUI").SetActive(true);
             countdown -= Time.deltaTime;
             if (countdown <= 0)
             {
