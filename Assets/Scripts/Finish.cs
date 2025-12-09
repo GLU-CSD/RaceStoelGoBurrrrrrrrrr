@@ -6,6 +6,7 @@ public class Finish : MonoBehaviour
 {
     [SerializeField] private CheckPoints[] checkPoints;
     [SerializeField] private TextMeshProUGUI lapText;
+    private float countdown = 3;
     private int lapCount = 1;
 
     private void OnTriggerEnter(Collider other)
@@ -30,8 +31,12 @@ public class Finish : MonoBehaviour
         lapText.text = "Lap:" + " " + lapCount.ToString() + "/3";
         if (lapCount >= 4)
         {
-            SceneManager.LoadScene(1);
-
+            GameObject.FindGameObjectWithTag("PlayerIU").SetActive(true);
+            countdown -= Time.deltaTime;
+            if (countdown <= 0)
+            {
+                SceneManager.LoadScene(1);
+            }
         }
     }
 }

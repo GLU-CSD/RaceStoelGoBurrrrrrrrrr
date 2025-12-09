@@ -80,7 +80,7 @@ public class EngineMultiLayerEngine : MonoBehaviour
             if (throttleAction == null || throttleAction.action == null)
                 return 0f;
 
-            return throttleAction.action.ReadValue<float>();
+            return -1f - throttleAction.action.ReadValue<float>();
         }
         else
         {
