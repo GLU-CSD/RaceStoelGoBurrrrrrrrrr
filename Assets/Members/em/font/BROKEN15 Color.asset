@@ -60,6 +60,8 @@ MonoBehaviour:
   m_SourceFontFilePath: 
   m_AtlasPopulationMode: 1
   InternalDynamicOS: 0
+<<<<<<< HEAD
+=======
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -457,6 +459,7 @@ MonoBehaviour:
   m_GlyphTable: []
   m_CharacterTable: []
 >>>>>>> Stashed changes
+>>>>>>> 8d4ade655b7ee069175712b2c017721d9c5ea991
   m_GlyphTable: []
   m_CharacterTable: []
   m_AtlasTextures:
@@ -469,6 +472,8 @@ MonoBehaviour:
   m_AtlasHeight: 1024
   m_AtlasPadding: 9
   m_AtlasRenderMode: 69652
+<<<<<<< HEAD
+=======
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -556,12 +561,15 @@ MonoBehaviour:
 =======
   m_UsedGlyphRects: []
 >>>>>>> Stashed changes
+>>>>>>> 8d4ade655b7ee069175712b2c017721d9c5ea991
   m_UsedGlyphRects: []
   m_FreeGlyphRects:
   - m_X: 0
     m_Y: 0
     m_Width: 1024
     m_Height: 1024
+<<<<<<< HEAD
+=======
 <<<<<<< Updated upstream
   - m_X: 277
     m_Y: 150
@@ -616,6 +624,7 @@ MonoBehaviour:
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+>>>>>>> 8d4ade655b7ee069175712b2c017721d9c5ea991
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
     m_LigatureSubstitutionRecords: []
@@ -23035,6 +23044,8 @@ Texture2D:
   m_LightmapFormat: 0
   m_ColorSpace: 1
   m_PlatformBlob: 
+<<<<<<< HEAD
+=======
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -23052,6 +23063,7 @@ Texture2D:
   image data: 4
   _typelessdata: 00000000
 >>>>>>> Stashed changes
+>>>>>>> 8d4ade655b7ee069175712b2c017721d9c5ea991
   image data: 4
   _typelessdata: 00000000
   m_StreamData:
