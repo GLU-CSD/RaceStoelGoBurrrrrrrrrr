@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen.unity
     guid: 6735cb3f9ceb1f843a1fb192f9eae7c7
   - enabled: 0
-    path: Assets/Scenes/BasicScene.unity
+    path: Assets/Scenes/MainScene.unity
     guid: 4e9fef26e6adb88479ad1b9834a32d94
   - enabled: 0
     path: Assets/Members/Nathan/Nathan.unity
