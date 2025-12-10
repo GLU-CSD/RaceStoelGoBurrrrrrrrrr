@@ -80,7 +80,12 @@ public class EngineMultiLayerEngine : MonoBehaviour
             if (throttleAction == null || throttleAction.action == null)
                 return 0f;
 
-            return throttleAction.action.ReadValue<float>();
+            float raw = throttleAction.action.ReadValue<float>();
+
+            // Logitech G29 gas pedal fix (remap -1 → 0 and 0 → 1)
+            float throttle = 1f - Mathf.InverseLerp(-1f, 0f, raw);
+
+            return throttle;
         }
         else
         {
