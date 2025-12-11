@@ -16742,15 +16742,15 @@ PrefabInstance:
     - target: {fileID: 3174041416793282670, guid: 1e535291f9c3296489159c735d1085b6, type: 3}
       propertyPath: 'checkPoints.Array.data[0]'
       value: 
-      objectReference: {fileID: 48317608}
+      objectReference: {fileID: 968288647}
     - target: {fileID: 3174041416793282670, guid: 1e535291f9c3296489159c735d1085b6, type: 3}
       propertyPath: 'checkPoints.Array.data[1]'
       value: 
-      objectReference: {fileID: 2110904873}
+      objectReference: {fileID: 2074639714}
     - target: {fileID: 3174041416793282670, guid: 1e535291f9c3296489159c735d1085b6, type: 3}
       propertyPath: 'checkPoints.Array.data[2]'
       value: 
-      objectReference: {fileID: 1160445089}
+      objectReference: {fileID: 955840231}
     - target: {fileID: 3174041416793282670, guid: 1e535291f9c3296489159c735d1085b6, type: 3}
       propertyPath: 'checkPoints.Array.data[3]'
       value: 
@@ -16758,15 +16758,15 @@ PrefabInstance:
     - target: {fileID: 3174041416793282670, guid: 1e535291f9c3296489159c735d1085b6, type: 3}
       propertyPath: 'checkPoints.Array.data[4]'
       value: 
-      objectReference: {fileID: 955840231}
+      objectReference: {fileID: 1160445089}
     - target: {fileID: 3174041416793282670, guid: 1e535291f9c3296489159c735d1085b6, type: 3}
       propertyPath: 'checkPoints.Array.data[5]'
       value: 
-      objectReference: {fileID: 2074639714}
+      objectReference: {fileID: 2110904873}
     - target: {fileID: 3174041416793282670, guid: 1e535291f9c3296489159c735d1085b6, type: 3}
       propertyPath: 'checkPoints.Array.data[6]'
       value: 
-      objectReference: {fileID: 968288647}
+      objectReference: {fileID: 48317608}
     - target: {fileID: 4284249975796902894, guid: 1e535291f9c3296489159c735d1085b6, type: 3}
       propertyPath: m_Name
       value: Finish
@@ -71761,7 +71761,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.25
+  m_VoxelSize: 0.41666666
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 70170144b407f2f428037532081b0e56, type: 2}
   m_BuildHeightMesh: 0
@@ -172194,6 +172194,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2956869164702410644, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1848223884}
+    - targetCorrespondingSourceObject: {fileID: 2956869164702410644, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1848223889}
   m_SourcePrefab: {fileID: 100100000, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
 --- !u!114 &1848223882 stripped
 MonoBehaviour:
@@ -172313,6 +172316,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7493023832195518192, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
   m_PrefabInstance: {fileID: 1848223881}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1848223889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848223883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9943491ec1766214da4652068a507be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggle: {fileID: -4462983194276739388, guid: 90c361a11fab6e64bb9d1e4cde53fc3f, type: 3}
+  playerCanvas: {fileID: 709178608}
 --- !u!1001 &1848418805
 PrefabInstance:
   m_ObjectHideFlags: 0
