@@ -75,7 +75,7 @@
                 {
                     "name": "",
                     "id": "95fb2fe5-53ec-42d9-95f6-300aa607f455",
-                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/z",
+                    "path": "<HID::Logitech G29 Driving Force Racing Wheel>/stick/y",
                     "interactions": "",
                     "processors": "",
                     "groups": ";RaceWheel",

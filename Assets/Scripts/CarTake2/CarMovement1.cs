@@ -55,6 +55,7 @@ public class RealisticCarMovementG29 : MonoBehaviour
         float steerInput = steer.action.ReadValue<float>();
 
         isReversing = pokeValue > 0.1f;
+        Debug.Log(gas);
 
         UpdateSteeringWheel(steerInput);
         UpdatePedals(gas, brake, pokeValue);
