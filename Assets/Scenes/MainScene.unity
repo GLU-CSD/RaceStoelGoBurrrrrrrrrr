@@ -64276,6 +64276,18 @@ PrefabInstance:
       value: AICar (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: maxSpeed
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: minSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
       propertyPath: waypoints.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -64321,7 +64333,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 701182436}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 112a49ed7287b5c48869de6a1f2855aa, type: 3}
   m_Name: 
@@ -65592,7 +65604,7 @@ GameObject:
   - component: {fileID: 709178610}
   m_Layer: 6
   m_Name: PlayerUI
-  m_TagString: Untagged
+  m_TagString: PlayerUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125096,6 +125108,18 @@ PrefabInstance:
       value: AICar
       objectReference: {fileID: 0}
     - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: maxSpeed
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: minSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
       propertyPath: waypoints.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -125141,7 +125165,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1342184128}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 112a49ed7287b5c48869de6a1f2855aa, type: 3}
   m_Name: 
@@ -138574,6 +138598,18 @@ PrefabInstance:
       value: AICar (2)
       objectReference: {fileID: 0}
     - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: maxSpeed
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: minSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092790127044248613, guid: 36cdde08759a7524498d0b1dc95a53a8, type: 3}
       propertyPath: waypoints.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -138619,7 +138655,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1479743832}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 112a49ed7287b5c48869de6a1f2855aa, type: 3}
   m_Name: 
@@ -164346,35 +164382,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 817
+      value: 824
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.56
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 667
+      value: 647
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.64318264
+      value: -0.7059355
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.6429576
+      value: 0.7057626
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.29409346
+      value: 0.04224477
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.29399085
+      value: 0.04206788
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90.028
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -164382,7 +164418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 130.871
+      value: 173.179
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 140f996540ba92e47b97a3f9f1f6b94f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -173653,7 +173689,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3768697649247653865, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
       propertyPath: maxSpeed
-      value: 75
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768697649247653865, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768697649247653865, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
+      propertyPath: brakeForce
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 3768697649247653865, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
       propertyPath: forwardForce
@@ -173721,6 +173765,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2956869164702410644, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1848223889}
+    - targetCorrespondingSourceObject: {fileID: 2956869164702410644, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1848223891}
   m_SourcePrefab: {fileID: 100100000, guid: 6b1d9e7a7ae1cb543b27eabf6fc0fc79, type: 3}
 --- !u!114 &1848223882 stripped
 MonoBehaviour:
@@ -173728,7 +173775,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1848223881}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848223883}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcc1f8ef1b2625848b925f122ea3951a, type: 3}
   m_Name: 
@@ -173854,6 +173901,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggle: {fileID: -4462983194276739388, guid: 90c361a11fab6e64bb9d1e4cde53fc3f, type: 3}
   playerCanvas: {fileID: 709178608}
+--- !u!135 &1848223891
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848223883}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 1, z: 1.5}
 --- !u!1001 &1848418805
 PrefabInstance:
   m_ObjectHideFlags: 0
