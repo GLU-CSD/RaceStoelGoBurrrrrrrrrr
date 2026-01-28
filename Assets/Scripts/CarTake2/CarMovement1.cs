@@ -101,6 +101,7 @@ public class RealisticCarMovementG29 : MonoBehaviour
     {
         if (isReversing)
             steerInput *= -1f;
+        Debug.Log(steerInput);
 
         //float speedFactor = Mathf.Clamp(rb.linearVelocity.magnitude / maxSpeed, 0f, 1f);
         float targetSteer = steerInput * maxSteerAngle / 8;
